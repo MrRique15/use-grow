@@ -25,18 +25,18 @@ class UsersRepository implements IUsersRepository {
                 email: email
             },
             from: {
-                name: 'Equipe Ohfy',
-                email: 'ohfy@ohfy.com.br'
+                name: 'Equipe Use&Grow',
+                email: 'use&grow@hotmail.com'
             },
             subject: 'Finalização de Cadastro',
             body: `
                 <p>Olá <b>${name} ${surename}</b><br/>
-                Seja bem-vindo ao Ohfy APP!<br/>
+                Seja bem-vindo ao Use&Grow!<br/>
                 Com sua conta autorizada, agora você pode navegar e aproveitar todas as nossas funcionalidades.<br/>
                 Desenvolvemos cada parte com muito cuidado em entregar o melhor aos nossos clientes.<br/>
-                Esperamos que você goste do Ohfy APP e te ajude com as tarefas cotidianas!<br/><br/>
+                Esperamos que você goste do Use&Grow APP e te ajude com as tarefas cotidianas!<br/><br/>
                 Atenciosamente,<br/>
-                Equipe <b>Ohfy</b></p>
+                Equipe <b>Use&Grow</b></p>
             `
         })
 
@@ -75,8 +75,8 @@ class UsersRepository implements IUsersRepository {
                 email: email
             },
             from: {
-                name: 'Equipe Ohfy',
-                email: 'ohfy@ohfy.com.br'
+                name: 'Equipe Use&Grow',
+                email: 'use&grow@hotmail.com'
             },
             subject: 'Confirmação de Cadastro',
             body: `
@@ -85,7 +85,7 @@ class UsersRepository implements IUsersRepository {
                 Basta voltar para a tela de login e realizar o login com email e senha cadastrados.<br/>
                 Após isso, algumas informações serão solicitadas junto do código de confirmação.<br/><br/>
                 Atenciosamente,<br/>
-                Equipe <b>Ohfy</b></p>
+                Equipe <b>Use&Grow</b></p>
             `
         })
         return await User.create(user)
@@ -103,8 +103,8 @@ class UsersRepository implements IUsersRepository {
                 email: email
             },
             from: {
-                name: 'Equipe Ohfy',
-                email: 'ohfy@ohfy.com.br'
+                name: 'Equipe Use&Grow',
+                email: 'use&grow@hotmail.com'
             },
             subject: 'Altualização de Perfil',
             body: `
@@ -114,7 +114,7 @@ class UsersRepository implements IUsersRepository {
                 Caso seja você mesmo quem alterou seus dados, ignore este e-mail.<br/>
                 Porém, caso não reconheça essa alteração, recomendamos que altere sua senha e mantenha a segurança de sua conta.<br/><br/>
                 Atenciosamente,<br/>
-                Equipe <b>Ohfy</b></p>
+                Equipe <b>Use&Grow</b></p>
             `
         })
         return await User.findOneAndUpdate(
@@ -138,18 +138,18 @@ class UsersRepository implements IUsersRepository {
                 email: email
             },
             from: {
-                name: 'Equipe Ohfy',
-                email: 'ohfy@ohfy.com.br'
+                name: 'Equipe Use&Grow',
+                email: 'use&grow@hotmail.com'
             },
             subject: 'Exclusão de Conta',
             body: `
                 <p>Olá,<br/>
                 Notamos uma que excluiu sua conta em nosso aplicativo.<br/>
-                Ficamos muito tristes em saber que não irá mais fazer parte da família Ohfy.<br/>
+                Ficamos muito tristes em saber que não irá mais fazer parte da família Use&Grow.<br/>
                 Aguardamos anciosamente sua volta, estaremos sempre de portas abertas para você.<br/>
-                Caso não reconheça a exclusão da conta, entre em contato com o suporte Ohfy.<br/><br/>
+                Caso não reconheça a exclusão da conta, entre em contato com o suporte Use&Grow.<br/><br/>
                 Atenciosamente,<br/>
-                Equipe <b>Ohfy</b></p>
+                Equipe <b>Use&Grow</b></p>
             `
         })
         return await User.findOneAndDelete({ email:email })
