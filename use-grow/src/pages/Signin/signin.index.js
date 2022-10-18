@@ -1,15 +1,32 @@
-import React from "react";
-import { 
-  View, 
+import React, { useState } from "react";
+import {
+  View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
-  return(
+  const navigation = useNavigation();
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  async function gotoRegister() {
+    navigation.navigate('Register');
+  }
+
+  async function gotoForgotPassword() {
+    // navigation.navigate('ForgotPassword')
+  }
+
+  async function handleLogin(){
+    navigation.navigate('HomeUser');
+  }
+
+  return (
     <View style={styles.container}>
 
       <Animatable.View animation='fadeInLeft' delay={500} style={styles.containerHeader}>
@@ -22,20 +39,35 @@ export default function SignIn() {
         <TextInput
           placeholder="insira seu e-mail"
           style={styles.input}
+          onChangeText={text => setEmail(text.toLowerCase())}
         />
 
         <Text style={styles.title}>Senha</Text>
         <TextInput
           placeholder="insira sua senha"
           style={styles.input}
+          onChangeText={text => setPassword(text)}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={handleLogin}
+        >
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonRegister}>
+        <TouchableOpacity
+          style={styles.buttonRegister}
+          onPress={gotoRegister}
+        >
           <Text style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttonRegister}
+          onPress={gotoForgotPassword}
+        >
+          <Text style={styles.registerText}>Esqueci minha senha</Text>
         </TouchableOpacity>
 
       </Animatable.View>

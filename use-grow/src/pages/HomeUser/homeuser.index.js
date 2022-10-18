@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,18 +11,33 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Welcome() {
   const navigation = useNavigation();
-
+  const data = [
+    {
+      id: 1,
+      title: 'Whey Protein - Growth',
+      description: 'Whey Protein - Growth',
+      price: 'R$ 99,90',
+      image: require('../../assets/produtos/wheyprotein.png'),
+    },
+  ];
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Animatable.Image
-          animation='flipInY'
-          source={require('../../assets/logo.png')}
-          style={{ width: '100%' }}
-          resizeMode="contain"
-        />
-      </View>
-
+      {/* {data.map((item) => (
+        <View style={styles.card} key={item.id}>
+          <Image source={item.image} style={styles.cardImage} />
+          <View style={styles.cardContent}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.price}>{item.price}</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('SignIn')}
+            >
+              <Text style={styles.buttonText}>Acessar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ))} */}
       <Animatable.View delay={600} animation='fadeInUp' style={styles.formContainer}>
         <Text style={styles.title}>Otimize sua rotina de treinos Apply&Grow</Text>
         <Text style={styles.text}>Acesse e conheça os benefícios</Text>
