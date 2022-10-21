@@ -1,54 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
+  ScrollView,
+  TextInput,
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
+import BottomTab from "../../components/bottomTab";
+import dataItens from "../../assets/data";
+const dataItensLocal = dataItens();
 
 export default function Welcome() {
   const navigation = useNavigation();
-  const data = [
-    {
-      id: 1,
-      title: 'Whey Protein - Growth',
-      description: 'Whey Protein - Growth',
-      price: 'R$ 99,90',
-      image: require('../../assets/produtos/wheyprotein.png'),
-    },
-  ];
+  const [data, setData] = useState(dataItensLocal);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    if (searchText === "") {
+      setData(dataItensLocal);
+    } else {
+      setData(
+        dataItensLocal.filter(
+          (item) =>
+            item.title.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        )
+      )
+    }
+  }, [searchText]);
   return (
     <View style={styles.container}>
-      {/* {data.map((item) => (
-        <View style={styles.card} key={item.id}>
-          <Image source={item.image} style={styles.cardImage} />
-          <View style={styles.cardContent}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-            <Text style={styles.price}>{item.price}</Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('SignIn')}
-            >
-              <Text style={styles.buttonText}>Acessar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ))} */}
-      <Animatable.View delay={600} animation='fadeInUp' style={styles.formContainer}>
-        <Text style={styles.title}>Otimize sua rotina de treinos Apply&Grow</Text>
-        <Text style={styles.text}>Acesse e conheça os benefícios</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('SignIn')}
-        >
-          <Text style={styles.buttonText}>Acessar</Text>
-        </TouchableOpacity>
-      </Animatable.View>
+      <View style={styles.headerHome}>
+        <Text style={styles.headerTitle}>Encontre os melhores produtos</Text>
+        <TextInput
+          placeholder="Filtre por nome"
+          placeholderTextColor="gray"
+          style={styles.input}
+          onChangeText={(text) => setSearchText(text)}
+        />
+      </View>
+
+      <ScrollView>
+        {data.map((item) => (
+          <Animatable.View delay={600} animation={item.id % 2 == 0 ? 'fadeInLeft' : 'fadeInRight'} style={styles.itemContainer} key={item.id}>
+            <View style={styles.itemDisplayView}>
+              <View style={styles.imageItemView}>
+                <Image source={item.image} style={styles.imageItem}></Image>
+              </View>
+              <View style={styles.itemItens}>
+                <Text style={styles.itemTitle}>{item.title}</Text>
+                <View style={styles.itemPriceView}>
+                  <Text style={styles.itemPrice}>{item.price}</Text>
+                  <TouchableOpacity style={styles.itemButton}>
+                    <Text style={styles.itemButtonText}>Comprar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Animatable.View>
+        ))}
+      </ScrollView>
+
+      <BottomTab />
+
     </View>
   );
 }
@@ -57,44 +75,112 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#38A69D',
-  },
-  logoContainer: {
-    flex: 2,
-    backgroundColor: '#38A69D',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignContent: 'center'
   },
-  formContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    paddingStart: '5%',
-    paddingEnd: '5%',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 28,
-    marginBottom: 12,
-  },
-  text: {
-    color: '#a1a1a1'
-  },
-  button: {
-    position: 'absolute',
-    backgroundColor: '#38A69D',
-    borderRadius: 50,
-    paddingVertical: 8,
-    width: '60%',
-    alignSelf: 'center',
-    bottom: '15%',
+
+
+  headerHome: {
+    height: '20%',
+    alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#000',
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
   },
-  buttonText: {
+  headerTitle: {
     fontSize: 18,
     color: '#FFF',
     fontWeight: 'bold',
-  }
+    marginTop: '10%',
+  },
+  input: {
+    borderColor: '#7CFC00',
+    borderWidth: 3,
+    borderRadius: 10,
+    marginTop: 10,
+    color: '#000',
+    backgroundColor: '#FFF',
+    height: '20%',
+    width: '50%',
+    textAlign: 'center',
+  },
+
+
+  itemContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    marginTop: 20,
+    width: "95%",
+    height: 100,
+    alignSelf: 'center',
+    display: 'flex'
+  },
+  itemDisplayView: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row'
+  },
+  imageItemView: {
+    marginLeft: '2%',
+    marginRight: '5%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '26%',
+    height: '90%',
+    overflow: 'hidden',
+    bottom: 0,
+    borderColor: '#7CFC00',
+    borderWidth: 3,
+    borderRadius: 20,
+  },
+  imageItem: {
+    resizeMode: 'contain',
+    height: '100%',
+    width: '100%',
+  },
+  itemItens: {
+    flex: 1,
+  },
+  itemTitle: {
+    fontSize: 15,
+    fontWeight: '500',
+    marginBottom: '3%',
+  },
+  itemPriceView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'flex-end',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  itemPrice: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    alignSelf: 'flex-end',
+    marginBottom: '3%',
+    marginLeft: '28%',
+    marginRight: '2%',
+    bottom: 0,
+  },
+  itemButton: {
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 3,
+    backgroundColor: '#7CFC00',
+    width: '30%',
+    height: "70%",
+    borderRadius: 10,
+    marginRight: "10%",
+    alignSelf: 'flex-end',
+  },
+  itemButtonText: {
+    fontSize: 13,
+    fontWeight: 'bold'
+  },
 });
