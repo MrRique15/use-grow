@@ -4,6 +4,7 @@ import Welcome from '../pages/Welcome/welcome.index';
 import SignIn from '../pages/Signin/signin.index';
 import Register from '../pages/Register/register.index';
 import HomeUser from '../pages/HomeUser/homeuser.index';
+import Tasks from '../pages/TasksUser/tasksuser.index';
 import { TabActions } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
@@ -38,6 +39,14 @@ export default function Routes() {
             <Stack.Screen
                 name="HomeUser"
                 component={HomeUser}
+                options={{
+                    headerShown: false
+                }}
+            />
+
+            <Stack.Screen
+                name="TasksUser"
+                component={Tasks}
                 options={{
                     headerShown: false
                 }}

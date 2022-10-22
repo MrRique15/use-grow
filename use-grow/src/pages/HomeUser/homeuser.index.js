@@ -11,7 +11,8 @@ import {
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
 import BottomTab from "../../components/bottomTab";
-import dataItens from "../../assets/data";
+import dataItens  from "../../assets/data";
+import { FontAwesome5 } from '@expo/vector-icons';
 const dataItensLocal = dataItens();
 
 export default function Welcome() {
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#38A69D',
-    justifyContent: 'center',
     alignContent: 'center'
   },
 
@@ -116,7 +116,14 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 100,
     alignSelf: 'center',
-    display: 'flex'
+    display: 'flex',
+    shadowRadius: 7,
+    shadowColor: '#000',
+    shadowOpacity: 0.6,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
   },
   itemDisplayView: {
     alignItems: 'center',
@@ -134,8 +141,6 @@ const styles = StyleSheet.create({
     height: '90%',
     overflow: 'hidden',
     bottom: 0,
-    borderColor: '#7CFC00',
-    borderWidth: 3,
     borderRadius: 20,
   },
   imageItem: {
