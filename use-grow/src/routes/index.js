@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export default function Routes() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ animation: 'none' }}>
             <Stack.Screen
                 name="Home"
                 component={Welcome}
