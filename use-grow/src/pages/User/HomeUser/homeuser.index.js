@@ -10,12 +10,12 @@ import {
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
-import BottomTab from "../../components/bottomTab";
-import dataItens  from "../../assets/data";
+import BottomTab from "../../../components/bottomTab";
+import dataItens from "../../../assets/data";
 import { FontAwesome5 } from '@expo/vector-icons';
 const dataItensLocal = dataItens();
 
-export default function Welcome() {
+export default function HomeUser() {
   const navigation = useNavigation();
   const [data, setData] = useState(dataItensLocal);
   const [searchText, setSearchText] = useState("");
@@ -81,19 +81,27 @@ const styles = StyleSheet.create({
 
 
   headerHome: {
-    height: '20%',
-    alignContent: 'center',
+    height: '15%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
+    backgroundColor: 'gray',
+    borderBottomEndRadius: 40,
+    borderBottomStartRadius: 40,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1.45,
+    shadowRadius: 3.94,
+    elevation: 5,
+    marginBottom: '1%',
   },
   headerTitle: {
     fontSize: 18,
     color: '#FFF',
     fontWeight: 'bold',
-    marginTop: '10%',
+    marginTop: '6%',
   },
   input: {
     borderColor: '#7CFC00',

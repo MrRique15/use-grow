@@ -11,8 +11,8 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
   const navigation = useNavigation();
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   async function gotoRegister() {
     navigation.navigate('Register');
@@ -22,7 +22,7 @@ export default function SignIn() {
     // navigation.navigate('ForgotPassword')
   }
 
-  async function handleLogin(){
+  async function handleLogin() {
     navigation.navigate('HomeUser');
   }
 
@@ -49,7 +49,7 @@ export default function SignIn() {
           onChangeText={text => setPassword(text)}
         />
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.button}
           onPress={handleLogin}
         >
@@ -118,6 +118,14 @@ const styles = StyleSheet.create({
     marginTop: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.40,
+    shadowRadius: 1.94,
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',

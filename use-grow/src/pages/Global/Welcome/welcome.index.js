@@ -17,7 +17,7 @@ export default function Welcome() {
       <View style={styles.logoContainer}>
         <Animatable.Image
           animation='flipInY'
-          source={require('../../assets/logo.png')}
+          source={require('../../../assets/logo.png')}
           style={{ width: '100%' }}
           resizeMode="contain"
         />
@@ -76,6 +76,14 @@ const styles = StyleSheet.create({
     bottom: '15%',
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.40,
+    shadowRadius: 1.94,
+    elevation: 5,
   },
   buttonText: {
     fontSize: 18,

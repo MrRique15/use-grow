@@ -63,7 +63,7 @@ export default function SignIn() {
           <View style={styles.logoContainer}>
             <Animatable.Image
               animation='bounceIn'
-              source={require('../../assets/registericon.png')}
+              source={require('../../../assets/registericon.png')}
               style={{ width: '20%' }}
               resizeMode="contain"
             />
@@ -174,7 +174,7 @@ export default function SignIn() {
         </Animatable.View>
 
         <Animatable.View animation='fadeInUp' style={styles.containerForm}>
-          <ScrollView>
+          <ScrollView style={{width: '100%'}}>
             <Text style={styles.title}>Nome da Empresa</Text>
             <TextInput
               placeholder="insira seu nome"
@@ -293,6 +293,14 @@ const styles = StyleSheet.create({
     marginTop: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.40,
+    shadowRadius: 1.94,
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',
