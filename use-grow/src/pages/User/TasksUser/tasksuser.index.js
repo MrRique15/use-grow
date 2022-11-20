@@ -3,13 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   TouchableOpacity,
   ScrollView,
-  TextInput,
   Alert
 } from "react-native";
-import BottomTab from "../../components/bottomTab";
+import BottomTab from "../../../components/bottomTab";
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -81,13 +79,12 @@ const tasksUser = [
   [],
 ]
 
-export default function Tasks() {
+export default function TasksUser() {
   const daysOgTheWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
   const day = new Date().getDay();
   const navigation = useNavigation();
   const [daySelected, setDaySelected] = useState(day);
   const [dataTasks, setDataTasks] = useState(tasksUser[daySelected]);
-
 
   function changeDay(dayInsert) {
     setDaySelected(dayInsert);
@@ -210,9 +207,17 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
+    backgroundColor: 'gray',
+    borderBottomEndRadius: 40,
+    borderBottomStartRadius: 40,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1.45,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   headerTitle: {
     fontSize: 18,
