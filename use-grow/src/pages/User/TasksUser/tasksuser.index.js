@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Alert
+  Alert,
+  Dimensions
 } from "react-native";
 import BottomTab from "../../../components/bottomTab";
-import * as Animatable from 'react-native-animatable';
-import { useNavigation } from "@react-navigation/native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, Feather } from '@expo/vector-icons';
+import ModalEditExercise from "../../../components/modalEditExercise";
+
+const { width, height } = Dimensions.get('screen');
 
 const tasksUser = [
   [
@@ -36,7 +38,7 @@ const tasksUser = [
   [
     {
       id: 1,
-      title: 'Abdominal',
+      title: 'Supino',
       description: '3x10',
       done: false
     },
@@ -82,16 +84,22 @@ const tasksUser = [
 export default function TasksUser() {
   const daysOgTheWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
   const day = new Date().getDay();
-  const navigation = useNavigation();
   const [daySelected, setDaySelected] = useState(day);
   const [dataTasks, setDataTasks] = useState(tasksUser[daySelected]);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [exerciseId, setExerciseId] = useState(null);
 
   function changeDay(dayInsert) {
     setDaySelected(dayInsert);
   }
 
   function addExercise() {
-    console.log('Adicionando exercício');
+    setDataTasks([...dataTasks, {
+      id: dataTasks.length + 1,
+      title: 'Novo Exercicio ' + (dataTasks.length + 1),
+      description: 'NxM',
+      done: false
+    }]);
   }
 
   function toogleExercise(id) {
@@ -107,9 +115,19 @@ export default function TasksUser() {
     Alert.alert('Atenção', 'Não é possível concluir exercícios de outros dias da semana.');
   }
 
+  function editExercise(index) {
+    setExerciseId(index);
+    setEditModalVisible(true);
+  }
+
   useEffect(() => {
     setDataTasks(tasksUser[daySelected]);
   }, [daySelected]);
+
+  useEffect(() => {
+    console.log("Alterando dataTasks");
+    console.log(dataTasks);
+  }, [dataTasks]);
 
   return (
     <View style={styles.container}>
@@ -172,15 +190,22 @@ export default function TasksUser() {
       <Text style={styles.titleTasks}>{daysOgTheWeek[daySelected]}</Text>
       <ScrollView>
         <View style={styles.containerTasks}>
-          {dataTasks.map((exercice) => (
+          {dataTasks.map((exercice,index) => (
             <View style={styles.containerExercice} key={exercice.title}>
               <View style={styles.containerExerciceTitle}>
-                <Text style={styles.titleExercice}>{exercice.title}</Text>
+                <Text style={styles.titleExercice}>{exercice.title.length > 14 ? '' + exercice.title.slice(0, 14) + '...' : exercice.title}</Text>
                 <Text style={styles.descriptionExercice}>{exercice.description}</Text>
+                <View style={styles.containerExerciceButtons}>
+                  <TouchableOpacity onPress={() => { toogleExercise(exercice.id) }} style={{marginRight: '25%'}}>
+                    {(exercice.done) ? <Feather name="check-square" size={26} color="lightgreen" /> : <Feather name="square" size={26} color="gray" />}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { editExercise(index) }}>
+                    <Feather name="edit" size={26} color="gray" />
+                  </TouchableOpacity>
+                </View>
+
               </View>
-              <TouchableOpacity style={styles.containerExerciceButton} onPress={() => { toogleExercise(exercice.id) }}>
-                {(exercice.done) ? <FontAwesome5 name="check" size={24} color="green" /> : <FontAwesome5 name="times" size={24} color="red" />}
-              </TouchableOpacity>
+
             </View>
           ))}
           <TouchableOpacity style={styles.containerExercice} onPress={() => { addExercise() }}>
@@ -188,8 +213,11 @@ export default function TasksUser() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <BottomTab />
+      
+      {editModalVisible && (
+        <ModalEditExercise dataTasks={dataTasks} setDataTasks={setDataTasks} setEditModalVisible={setEditModalVisible} editModalVisible={editModalVisible} exerciseId={exerciseId} setExerciseId={setExerciseId}/>
+      )}
+      <BottomTab/>
     </View>
   );
 }
@@ -262,6 +290,7 @@ const styles = StyleSheet.create({
   containerTasks: {
     alignItems: 'center',
     justifyContent: 'flex-start',
+    height: '100%',
   },
   titleTasks: {
     alignSelf: 'center',
@@ -275,7 +304,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 70,
     margin: 10,
-    borderColor: '#000',
+    borderColor: 'gray',
     borderWidth: 2,
     borderRadius: 20,
     alignItems: 'center',
@@ -289,17 +318,26 @@ const styles = StyleSheet.create({
     },
   },
   containerExerciceTitle: {
-    alignContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    width: '90%',
+    height: '50%',
   },
   titleExercice: {
-
+    width: '40%',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   descriptionExercice: {
-
+    fontSize: 16,
+    width: '40%',
+    textAlign: 'center',
   },
-  containerExerciceButton: {
-
+  containerExerciceButtons: {
+    width: '20%',
+    alignContent: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
-});
+})
