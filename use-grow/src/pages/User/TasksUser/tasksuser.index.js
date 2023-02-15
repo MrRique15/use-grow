@@ -82,7 +82,7 @@ const tasksUser = [
 ]
 
 export default function TasksUser() {
-  const daysOgTheWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
+  const daysOfTheWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
   const day = new Date().getDay();
   const [daySelected, setDaySelected] = useState(day);
   const [dataTasks, setDataTasks] = useState(tasksUser[daySelected]);
@@ -133,7 +133,7 @@ export default function TasksUser() {
     <View style={styles.container}>
 
       <View style={styles.headerHome}>
-        <Text style={styles.headerTitle}>Acompanhe seus exercícios</Text>
+        <Text style={styles.headerTitle}>Exercícios para Hoje</Text>
         <View style={styles.weekDaysHeader}>
           <TouchableOpacity
             style={daySelected === 0 ? styles.weekDaysHeaderItemSelected : styles.weekDaysHeaderItem}
@@ -187,7 +187,7 @@ export default function TasksUser() {
 
       </View>
 
-      <Text style={styles.titleTasks}>{daysOgTheWeek[daySelected]}</Text>
+      <Text style={styles.titleTasks}>{daysOfTheWeek[daySelected]}</Text>
       <ScrollView>
         <View style={styles.containerTasks}>
           {dataTasks.map((exercice,index) => (
@@ -225,17 +225,17 @@ export default function TasksUser() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(203, 215, 205, 1)',
     alignContent: 'center'
   },
 
 
   headerHome: {
-    height: '20%',
+    height: '17%',
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: '#abaab1',
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
     shadowColor: '#000',
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    color: '#FFF',
+    color: '#2F2F2F',
     fontWeight: 'bold',
     marginTop: '10%',
   },
@@ -273,16 +273,16 @@ const styles = StyleSheet.create({
     margin: 5,
     height: '52%',
     width: '12%',
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(203, 215, 122, 1)',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    borderColor: '#39FF14',
-    borderWidth: 2
+    borderColor: '#000',
+    borderWidth: 1
   },
   weekDaysHeaderItemText: {
     fontSize: 12,
-    color: '#000',
+    color: '#565d67',
     fontWeight: 'bold',
   },
 
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#2F2F2F',
     marginTop: '2%',
   },
   containerExercice: {
@@ -311,10 +311,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowRadius: 5,
     shadowColor: '#000',
-    shadowOpacity: 0.6,
+    shadowOpacity: 0.3,
     shadowOffset: {
       width: 5,
-      height: 10,
+      height: 5,
     },
   },
   containerExerciceTitle: {
@@ -328,6 +328,7 @@ const styles = StyleSheet.create({
     width: '40%',
     fontWeight: 'bold',
     fontSize: 16,
+    color: '#2F2F2F'
   },
   descriptionExercice: {
     fontSize: 16,

@@ -27,19 +27,19 @@ export default function BottomTab() {
   return (
     <Animatable.View style={styles.bottomTab}>
       <TouchableOpacity style={styles.circleArea}>
-        <Ionicons name="settings" size={24} color="black" />
+        <Ionicons name="settings" size={24} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea}>
-        <MaterialCommunityIcons name="food-fork-drink" size={30} color="black" />
+        <MaterialCommunityIcons name="food-fork-drink" size={30} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea} onPress={gotoHome}>
-        <MaterialIcons name="house" size={30} color="black" />
+        <MaterialIcons name="house" size={30} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea} onPress={gotoTasks}>
-        <FontAwesome5 name="tasks" size={30} color="black" />
+        <FontAwesome5 name="tasks" size={30} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea} onPress={gotoProfile}>
-        <MaterialIcons name="person" size={30} color="black" />
+        <MaterialIcons name="person" size={30} color="#2F2F2F" />
       </TouchableOpacity>
     </Animatable.View>
   )
@@ -47,12 +47,12 @@ export default function BottomTab() {
 
 const styles = {
   bottomTab: {
-    backgroundColor: 'gray',
-    height: '6%',
+    backgroundColor: '#abaab1',
+    height: '5%',
     width: '85%',
     position: 'absolute',
-    bottom: 10,
-    borderRadius: 15,
+    bottom: 20,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
