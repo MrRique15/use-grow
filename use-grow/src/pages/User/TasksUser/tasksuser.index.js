@@ -225,7 +225,7 @@ export default function TasksUser() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(203, 215, 205, 1)',
+    backgroundColor: 'rgba(80,215, 195, 1)',
     alignContent: 'center'
   },
 
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: '52%',
     width: '12%',
-    backgroundColor: 'rgba(203, 215, 122, 1)',
+    backgroundColor: 'rgba(80,255, 195, 1)',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

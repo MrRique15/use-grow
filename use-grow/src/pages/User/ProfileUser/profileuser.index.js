@@ -12,11 +12,23 @@ import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
+const userProfileData = {
+  "name": "Fulano",
+  "surename": "de tal",
+  "age": 20,
+  "weight": 75.8,
+  "height": 1.80,
+  "goal": "Emagrecer",
+  "finishedExercices": 235,
+  "daysCount": 43,
+  "subscription": "Premium"
+}
 import { Divider } from 'react-native-elements';
 
 export default function ProfileUser() {
 
   const navigation = useNavigation();
+  const [userData, setUserData] = useState(userProfileData);
 
   const [headerShown, setHeaderShown] = useState(true);
 
@@ -32,7 +44,7 @@ export default function ProfileUser() {
             <Ionicons name="person-circle-outline" size={150} color="#FFFFFF" />
           </View>
 
-          <Text style={styles.userNameTitle}>Nome do Usuário</Text>
+          <Text style={styles.userNameTitle}>{userData.name + ' ' + userData.surename}</Text>
 
           <TouchableOpacity 
             style={styles.touchableLine} 
@@ -63,16 +75,16 @@ export default function ProfileUser() {
       </View>
 
       <View style={styles.personalInfo}>
-        <Text>Nome</Text>
-        <Text>Idade</Text>
-        <Text>Peso</Text>
-        <Text>Estatura</Text>
-        <Text>Objetivos</Text>
+        <Text style={styles.personalInfoItens}>Nome: {userData.name + ' ' +userData.surename}</Text>
+        <Text style={styles.personalInfoItens}>Idade: {userData.age} anos</Text>
+        <Text style={styles.personalInfoItens}>Peso: {userData.weight} kg</Text>
+        <Text style={styles.personalInfoItens}>Estatura: {userData.height} m</Text>
+        <Text style={styles.personalInfoItens}>Objetivos: {userData.goal}</Text>
 
-        <Text>Exercicios Concluidos</Text>
-        <Text>Dias Utilizando</Text>
+        <Text style={styles.personalInfoItens}>Exercicios Concluidos: {userData.finishedExercices}</Text>
+        <Text style={styles.personalInfoItens}>Dias Utilizando: {userData.daysCount} dias</Text>
 
-        <Text>Assinatura</Text>
+        <Text style={styles.personalInfoItens}>Assinatura: Plano {userData.subscription}</Text>
         <Divider style={{ backgroundColor: 'black' }} />
       </View>
 
@@ -86,7 +98,7 @@ export default function ProfileUser() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(80,215, 195, 1)',
     alignItems: 'center',
   },
 
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
     paddingTop: '10%',
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
-    backgroundColor: 'gray',
+    backgroundColor: '#abaab1',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
     paddingTop: '5%',
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
-    backgroundColor: 'gray',
+    backgroundColor: '#abaab1',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -168,25 +180,35 @@ const styles = StyleSheet.create({
   personalInfoTitleText: {
     width: '100%',
     textAlign: 'center',
-    color: '#ffffff',
+    color: '#2F2F2F',
     fontSize: 14,
     fontWeight: 'bold'
   },
   personalInfoTitleLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#2F2F2F'
   },
 
 
   personalInfo: {
     height: '73%',
     width: '95%',
-    alignItems: 'center',
-    paddingTop: '3%',
+    alignItems: 'flex-start',
+    paddingTop: '5%',
+    paddingLeft: '5%',
     marginTop: '3%',
     borderWidth: 1,
-    borderColor: '#ffffff',
+    borderColor: '#2F2F2F',
     borderRadius: 30,
+  },
+
+  personalInfoItens: {
+    color: '#000',
+    fontSize: 18,
+    width: '95%',
+    marginBottom: '2%',
+    padding: '2%',
+    borderColor: '#000',
   },
 });

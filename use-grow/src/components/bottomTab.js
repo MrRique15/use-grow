@@ -24,12 +24,16 @@ export default function BottomTab() {
     navigation.navigate('ProfileUser');
   }
 
+  function gotoDiet() {
+    navigation.navigate('DietUser');
+  }
+
   return (
     <Animatable.View style={styles.bottomTab}>
       <TouchableOpacity style={styles.circleArea}>
         <Ionicons name="settings" size={24} color="#2F2F2F" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.circleArea}>
+      <TouchableOpacity style={styles.circleArea} onPress={gotoDiet}>
         <MaterialCommunityIcons name="food-fork-drink" size={30} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea} onPress={gotoHome}>
