@@ -89,7 +89,7 @@ export default function DietUser() {
     const [headerShown, setHeaderShown] = useState(true);
     const [eatings, setEatings] = useState(eatingsInitial);
     const [modalVisible, setModalVisible] = useState(false);
-    const [editingIndex, setEditingIndex] = useState(0);
+    const [editingIndex, setEditingIndex] = useState(null);
 
     function removeDietItem(index) {
         Alert.alert(
@@ -119,10 +119,10 @@ export default function DietUser() {
     }
 
     function addEating() {
-        setEatings([...eatings, [{
+        setEatings([...eatings, {
             'name': 'Nova Refeição',
             'foods': []
-        }]])
+        }])
     }
     return (
         <View style={styles.container}>

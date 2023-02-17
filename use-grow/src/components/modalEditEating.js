@@ -19,32 +19,32 @@ export default function ModalEditEating(props) {
 
     let eatingData = props.eatings[props.editingIndex]
 
-    function finalEditingTask() {
-        if (taskData.title == '' || taskData.description == '') {
-            Alert.alert('Erro', 'Insira um titulo e uma descrição para o exercício');
+    function finalEditingEating() {
+        if (eatingData.name == '' ) {
+            Alert.alert('Inválido', 'Insira um nome para a refeição');
             return;
         }
-        props.setDataTasks(props.dataTasks.map((item, index) => {
-            if (index == props.exerciseId) {
-                return taskData;
+        props.setEatings(props.eatings.map((item, index) => {
+            if (index == props.editingIndex) {
+                return eatingData;
             }
             return item;
         }));
-        props.setEditModalVisible(false);
-        props.setExerciseId(null);
+        props.setVisible(false);
+        props.setEditingIndex(null);
 
     }
 
-    function removeTask() {
-        props.setDataTasks(props.dataTasks.filter((item, index) => index !== props.exerciseId));
-        props.setEditModalVisible(false);
+    function removeEating() {
+        props.setEatings(props.eatings.filter((item, index) => index !== props.editingIndex));
+        props.setVisible(false);
     }
 
     return (
         <Modal
             transparent={true}
-            visible={props.editModalVisible}
-            onRequestClose={() => { props.setEditModalVisible(false) }}
+            visible={props.visible}
+            onRequestClose={() => { props.setVisible(false) }}
         >
             <KeyboardAvoidingView style={styles.modalViewAvoid} behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <ScrollView style={styles.scrollModalView} alignItems={'center'} justifyContent={'center'}>
@@ -56,13 +56,13 @@ export default function ModalEditEating(props) {
                         <View style={styles.eatingViewEdit}  >
                             <TextInput
                                 style={styles.inputTextTitle}
-                                onChangeText={(e) => { taskData.title = e }}
-                                placeholder='Título'
+                                onChangeText={(e) => { eatingData.name = e }}
+                                placeholder='Nome da refeição'
                                 placeholderTextColor='lightgray'
                             >
-                                {taskData.title}
+                                {eatingData.name}
                             </TextInput>
-                            <TextInput
+                            {/* <TextInput
                                 style={styles.inputTextDescription}
                                 multiline={true}
                                 onChangeText={(e) => { taskData.description = e }}
@@ -70,13 +70,13 @@ export default function ModalEditEating(props) {
                                 placeholderTextColor='lightgray'
                             >
                                 {taskData.description}
-                            </TextInput>
+                            </TextInput> */}
 
                             <View style={styles.buttonViews}>
-                                <TouchableOpacity style={styles.buttonRemoveTask} onPress={() => { removeTask() }}>
+                                <TouchableOpacity style={styles.buttonRemoveTask} onPress={() => { removeEating() }}>
                                     <Text style={styles.buttonRemoveTaskText}>Remover</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonConfirmEdit} onPress={() => finalEditingTask()}>
+                                <TouchableOpacity style={styles.buttonConfirmEdit} onPress={() => finalEditingEating()}>
                                     <Text style={styles.bbuttonConfirmEditText}>Confirmar</Text>
                                 </TouchableOpacity>
                             </View>
