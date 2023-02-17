@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -28,6 +28,7 @@ const userProfileData = {
     "subscription": "Premium"
 }
 import { Divider } from 'react-native-elements';
+import dataItens from "../../../assets/data";
 
 const eatingsInitial = [
     {
@@ -151,6 +152,10 @@ export default function DietUser() {
             'foods': []
         }])
     }
+
+    useEffect(() => {
+        console.log("Alterando refeições, salvar no BD")
+    }, [eatings])
     return (
         <View style={styles.container}>
             <View style={styles.header}>
