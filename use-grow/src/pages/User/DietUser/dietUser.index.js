@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     View,
     Text,
@@ -9,7 +9,12 @@ import {
 } from "react-native";
 import BottomTab from "../../../components/bottomTab";
 import { useNavigation } from "@react-navigation/native";
-import { Octicons, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { 
+    Octicons, 
+    FontAwesome5, 
+    Entypo 
+} from '@expo/vector-icons';
+import ModalEditEating from "../../../components/modalEditEating";
 
 const userProfileData = {
     "name": "Fulano",
@@ -25,27 +30,66 @@ const userProfileData = {
 import { Divider } from 'react-native-elements';
 
 const eatingsInitial = [
-    [{
+    {
         'name': 'Café da manhã',
-        'foods': ['Ovo - 1un', 'Pão - 120g', 'Leite - 140ml']
-    }],
-    [{
+        'foods': [
+            {
+                'name': 'Pão',
+                'amount': '100g'
+            },
+            {
+                'name': 'Requeijão',
+                'amount': '150g'
+            },
+            {
+                'name': 'Bolacha',
+                'amount': '100g'
+            }
+        ]
+    },
+    {
         'name': 'Almoço',
-        'foods': ['Arroz - 100g', 'Feijão - 100g', 'Carne - 100g']
-    }],
-    [{
+        'foods': [
+            {
+                'name': 'Carne',
+                'amount': '100g'
+            },
+            {
+                'name': 'Batata Doce',
+                'amount': '150g'
+            },
+            {
+                'name': 'Whey',
+                'amount': '100g'
+            }
+        ]
+    },
+    {
         'name': 'Jantar',
-        'foods': ['Carne - 100g', 'Batata Doce - 150g', 'Whey - 100g']
-    }],
+        'foods': [
+            {
+                'name': 'Arroz',
+                'amount': '100g'
+            },
+            {
+                'name': 'Alface',
+                'amount': '150g'
+            },
+            {
+                'name': 'Frango',
+                'amount': '150g'
+            }
+        ]
+    },
 ]
 export default function DietUser() {
 
     const navigation = useNavigation();
     const [userData, setUserData] = useState(userProfileData);
-
     const [headerShown, setHeaderShown] = useState(true);
-
     const [eatings, setEatings] = useState(eatingsInitial);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [editingIndex, setEditingIndex] = useState(0);
 
     function removeDietItem(index) {
         Alert.alert(
@@ -54,20 +98,27 @@ export default function DietUser() {
             [
                 {
                     text: "Cancelar",
-                    onPress: () => {},
+                    onPress: () => { },
                     style: "cancel"
                 },
-                { text: "Sim", onPress: () => {
-                    setEatings(eatings.filter((e, idx) => {
-                        return idx !== index
-                    }))
-                }}
+                {
+                    text: "Sim", onPress: () => {
+                        setEatings(eatings.filter((e, idx) => {
+                            return idx !== index
+                        }))
+                    }
+                }
             ],
             { cancelable: false }
         );
     }
 
-    function addEating(){
+    function editEatingItem(index) {
+        setEditingIndex(index);
+        setModalVisible(true);
+    }
+
+    function addEating() {
         setEatings([...eatings, [{
             'name': 'Nova Refeição',
             'foods': []
@@ -84,9 +135,12 @@ export default function DietUser() {
                     return (
                         <View style={styles.eatingTime} key={index}>
                             <View style={styles.eatingTimeHeader}>
-                                <Text style={styles.eatingTimeTitle}>{item[0].name}</Text>
+                                <Text style={styles.eatingTimeTitle}>{item.name}</Text>
                                 <View style={styles.iconView}>
-                                    <FontAwesome5 name="pencil-alt" size={18} color="black" style={styles.iconViewIcon} />
+                                    <TouchableOpacity onPress={() => {editEatingItem(index)}}>
+                                        <FontAwesome5 name="pencil-alt" size={18} color="black" style={styles.iconViewIcon} />
+                                    </TouchableOpacity>
+
                                     <TouchableOpacity onPress={() => { removeDietItem(index) }}>
                                         <Entypo name="cross" size={25} color="red" style={styles.iconViewIcon} />
                                     </TouchableOpacity>
@@ -95,11 +149,11 @@ export default function DietUser() {
                             <View>
                                 <Divider style={styles.divider} />
                             </View>
-                            {item[0].foods.map((foodItem) => {
+                            {item.foods.map((foodItem) => {
                                 return (
                                     <View style={styles.foodItem}>
                                         <Octicons name="dot-fill" size={16} color="black" />
-                                        <Text style={styles.foodItemText}>{foodItem}</Text>
+                                        <Text style={styles.foodItemText}>{foodItem.name + ' - ' + foodItem.amount}</Text>
                                     </View>
                                 )
                             })}
@@ -111,6 +165,17 @@ export default function DietUser() {
                 </TouchableOpacity>
             </ScrollView>
             <BottomTab />
+
+            {modalVisible &&
+                <ModalEditEating
+                    visible={modalVisible}
+                    setVisible={setModalVisible} 
+                    eatings={eatings} 
+                    setEatings={setEatings} 
+                    editingIndex={editingIndex} 
+                    setEditingIndex={setEditingIndex}
+                />
+            }
         </View>
     );
 }
@@ -210,6 +275,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         alignItems: 'center',
-        justifyContent : 'center',
+        justifyContent: 'center',
     },
 });
