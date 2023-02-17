@@ -82,7 +82,7 @@ export default function DietUser() {
             <ScrollView style={styles.scroll}>
                 {eatings.map((item, index) => {
                     return (
-                        <View style={styles.eatingTime}>
+                        <View style={styles.eatingTime} key={index}>
                             <View style={styles.eatingTimeHeader}>
                                 <Text style={styles.eatingTimeTitle}>{item[0].name}</Text>
                                 <View style={styles.iconView}>
