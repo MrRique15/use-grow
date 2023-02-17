@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Modal,
     StyleSheet,
@@ -12,12 +12,15 @@ import {
     TextInput,
     Alert,
 } from "react-native";
-
+import { 
+    Octicons, 
+    Entypo,
+} from '@expo/vector-icons';
 const { width, height } = Dimensions.get('screen')
 
 export default function ModalEditEating(props) {
 
-    let eatingData = props.eatings[props.editingIndex]
+    const [eatingData, setEatingData] = useState(props.eatings[props.editingIndex])
 
     function finalEditingEating() {
         if (eatingData.name == '' ) {
@@ -40,6 +43,33 @@ export default function ModalEditEating(props) {
         props.setVisible(false);
     }
 
+    function removeFood(index) {
+        Alert.alert(
+            "Remover item",
+            "Deseja realmente remover este item?",
+            [
+                {
+                    text: "Cancelar",
+                    onPress: () => { },
+                    style: "cancel"
+                },
+                {
+                    text: "Sim", onPress: () => {
+                        setEatingData({...eatingData, 
+                            foods: eatingData.foods.filter((item, idx) => idx !== index)
+                        })
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    function addNewFood(){
+        setEatingData({...eatingData, 
+            foods: [...eatingData.foods, {name: '', amount: ''}]
+        })
+    }
     return (
         <Modal
             transparent={true}
@@ -56,21 +86,55 @@ export default function ModalEditEating(props) {
                         <View style={styles.eatingViewEdit}  >
                             <TextInput
                                 style={styles.inputTextTitle}
-                                onChangeText={(e) => { eatingData.name = e }}
+                                onChangeText={(e) => {setEatingData({ ...eatingData, name: e })}}
                                 placeholder='Nome da refeição'
                                 placeholderTextColor='lightgray'
                             >
                                 {eatingData.name}
                             </TextInput>
-                            {/* <TextInput
-                                style={styles.inputTextDescription}
-                                multiline={true}
-                                onChangeText={(e) => { taskData.description = e }}
-                                placeholder='Descrição'
-                                placeholderTextColor='lightgray'
-                            >
-                                {taskData.description}
-                            </TextInput> */}
+                            {eatingData.foods.map((item, index) => {
+                                return (
+                                    <View style={styles.foodViewEdit} key={index}>
+                                        <TextInput 
+                                            style={styles.inputTextFoodName} 
+                                            placeholder='Alimento' 
+                                            placeholderTextColor='lightgray' 
+                                            onChangeText={(e) => {setEatingData({...eatingData, 
+                                                foods: eatingData.foods.map((food, idx) => {
+                                                    if (idx == index) {
+                                                        return {...food, name: e}
+                                                    }
+                                                    return food;
+                                                })})}
+                                            }
+                                            value={item.name}
+                                        />
+                                        <Text style={{marginLeft: 5}}>-</Text>
+                                        <TextInput 
+                                            style={styles.inputTextFoodAmount} 
+                                            placeholder='qtd'
+                                            placeholderTextColor='lightgray' 
+                                            onChangeText={(e) => {setEatingData({...eatingData, 
+                                                foods: eatingData.foods.map((food, idx) => {
+                                                    if (idx == index) {
+                                                        return {...food, amount: e}
+                                                    }
+                                                    return food;
+                                                })})}
+                                            }
+                                            value={item.amount}
+                                        />
+                                        <TouchableOpacity style={{marginLeft: 1, padding: 2}} onPress={() => {removeFood(index)}}>
+                                            <Entypo name="cross" size={24} color="red" style={styles.iconViewIcon} />
+                                        </TouchableOpacity>
+                                    </View>
+                                )
+                            })}
+                            {eatingData.foods.length < 10 && 
+                                <TouchableOpacity style={styles.buttonAddFood} onPress={() => {addNewFood()}}>
+                                    <Text style={styles.buttonAddFoodText}>Adicionar alimento</Text>
+                                </TouchableOpacity>
+                            }
 
                             <View style={styles.buttonViews}>
                                 <TouchableOpacity style={styles.buttonRemoveTask} onPress={() => { removeEating() }}>
@@ -106,7 +170,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center',
         width: width * 0.8,
-        height: height * 0.3,
+        height: height * 0.7,
         borderRadius: 20,
     },
     headerModal: {
@@ -122,7 +186,6 @@ const styles = StyleSheet.create({
 
     eatingViewEdit: {
         width: '90%',
-        height: '75%',
         alignItems: 'center',
         backgroundColor: 'rgba(80,215, 195, 1)',
         borderRadius: 20,
@@ -138,28 +201,54 @@ const styles = StyleSheet.create({
     },
     inputTextTitle: {
         width: '80%',
-        height: '20%',
+        height: 40,
         backgroundColor: '#fff',
         borderRadius: 20,
         marginTop: '5%',
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 17,
+        marginBottom: 10,
+    },
+    foodViewEdit: {
+        width: '80%',
+        height: 30,
+        marginBottom: 6,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    inputTextFoodName: {
+        fontSize: 16,
+        marginLeft: 5,
+        backgroundColor: '#fff',
+        padding: 2,
+        borderRadius: 3,
+        width: 130,
+        textAlign: 'center',
+    },
+    inputTextFoodAmount: {
+        fontSize: 16,
+        marginLeft: 5,
+        backgroundColor: '#fff',
+        padding: 2,
+        borderRadius: 3,
+        width: 60,
+        textAlign: 'center',
     },
     inputTextDescription: {
         width: '80%',
-        height: '20%',
         backgroundColor: '#fff',
         borderRadius: 20,
         marginTop: '5%',
         textAlign: 'center',
         paddingTop: '4%',
         fontSize: 14,
+        
     },
     buttonConfirmEdit: {
         backgroundColor: '#63f268',
         width: '36%',
-        height: '100%',
+        height: 40,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -182,7 +271,7 @@ const styles = StyleSheet.create({
     buttonRemoveTask: {
         backgroundColor: '#f15050',
         width: '36%',
-        height: '100%',
+        height: 40,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -205,8 +294,10 @@ const styles = StyleSheet.create({
     buttonViews: {
         marginTop: '3%',
         width: '100%',
-        height: '20%',
+        height: 60,
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'flex-end',
+        marginBottom: 10,
     },
 })

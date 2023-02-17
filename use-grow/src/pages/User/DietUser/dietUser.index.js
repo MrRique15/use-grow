@@ -61,6 +61,34 @@ const eatingsInitial = [
             {
                 'name': 'Whey',
                 'amount': '100g'
+            },
+            {
+                'name': 'Arroz',
+                'amount': '100g'
+            },
+            {
+                'name': 'Alface',
+                'amount': '150g'
+            },
+            {
+                'name': 'Frango',
+                'amount': '150g'
+            },
+            {
+                'name': 'Arroz',
+                'amount': '100g'
+            },
+            {
+                'name': 'Alface',
+                'amount': '150g'
+            },
+            {
+                'name': 'Frango',
+                'amount': '150g'
+            },
+            {
+                'name': 'Arroz',
+                'amount': '100g'
             }
         ]
     },
@@ -86,7 +114,6 @@ export default function DietUser() {
 
     const navigation = useNavigation();
     const [userData, setUserData] = useState(userProfileData);
-    const [headerShown, setHeaderShown] = useState(true);
     const [eatings, setEatings] = useState(eatingsInitial);
     const [modalVisible, setModalVisible] = useState(false);
     const [editingIndex, setEditingIndex] = useState(null);
@@ -149,9 +176,9 @@ export default function DietUser() {
                             <View>
                                 <Divider style={styles.divider} />
                             </View>
-                            {item.foods.map((foodItem) => {
+                            {item.foods.map((foodItem, idx) => {
                                 return (
-                                    <View style={styles.foodItem}>
+                                    <View style={styles.foodItem} key={idx}>
                                         <Octicons name="dot-fill" size={16} color="black" />
                                         <Text style={styles.foodItemText}>{foodItem.name + ' - ' + foodItem.amount}</Text>
                                     </View>

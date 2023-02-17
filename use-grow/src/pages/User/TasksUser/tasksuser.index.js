@@ -124,11 +124,6 @@ export default function TasksUser() {
     setDataTasks(tasksUser[daySelected]);
   }, [daySelected]);
 
-  useEffect(() => {
-    console.log("Alterando dataTasks");
-    console.log(dataTasks);
-  }, [dataTasks]);
-
   return (
     <View style={styles.container}>
 
