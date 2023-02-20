@@ -7,16 +7,12 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Platform,
-    ScrollView,
-    Dimensions,
     TextInput,
     Alert,
 } from "react-native";
 import { 
-    Octicons, 
     Entypo,
 } from '@expo/vector-icons';
-const { width, height } = Dimensions.get('screen')
 
 export default function ModalEditEating(props) {
 

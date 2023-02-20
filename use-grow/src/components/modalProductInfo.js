@@ -5,17 +5,13 @@ import {
     Text,
     View,
     TouchableOpacity,
-    KeyboardAvoidingView,
-    Platform,
     ScrollView,
     Dimensions,
-    TextInput,
     Alert,
     Image,
     Linking,
 } from "react-native";
 import { Entypo } from '@expo/vector-icons';
-const { width, height } = Dimensions.get('screen')
 
 export default function ModalProductInfo(props) {
 

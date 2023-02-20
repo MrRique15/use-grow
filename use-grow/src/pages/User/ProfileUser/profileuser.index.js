@@ -1,14 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
-  Alert
 } from "react-native";
 import BottomTab from "../../../components/bottomTab";
-import * as Animatable from 'react-native-animatable';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
@@ -27,7 +24,6 @@ import { Divider } from 'react-native-elements';
 
 export default function ProfileUser() {
 
-  const navigation = useNavigation();
   const [userData, setUserData] = useState(userProfileData);
 
   const [headerShown, setHeaderShown] = useState(true);

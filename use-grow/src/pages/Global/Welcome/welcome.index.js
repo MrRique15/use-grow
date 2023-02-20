@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import * as Animatable from 'react-native-animatable';

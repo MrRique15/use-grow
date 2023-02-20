@@ -7,7 +7,6 @@ import HomeUser from '../pages/User/HomeUser/homeuser.index';
 import TasksUser from '../pages/User/TasksUser/tasksuser.index';
 import ProfileUser from '../pages/User/ProfileUser/profileuser.index';
 import DietUser from '../pages/User/DietUser/dietUser.index';
-import { TabActions } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 

@@ -28,7 +28,6 @@ const userProfileData = {
     "subscription": "Premium"
 }
 import { Divider } from 'react-native-elements';
-import dataItens from "../../../assets/data";
 
 const eatingsInitial = [
     {

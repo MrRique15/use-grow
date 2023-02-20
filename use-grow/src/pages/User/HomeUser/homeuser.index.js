@@ -9,7 +9,6 @@ import {
   TextInput,
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
-import { useNavigation } from "@react-navigation/native";
 import BottomTab from "../../../components/bottomTab";
 import dataItens from "../../../assets/data";
 import { FontAwesome5 } from '@expo/vector-icons';
