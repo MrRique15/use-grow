@@ -15,7 +15,7 @@ import {
 
 const { width, height } = Dimensions.get('screen')
 
-export default function modalEditExercise(props) {
+export default function ModalEditExercise(props) {
 
   let taskData = props.dataTasks[props.exerciseId];
 

@@ -195,6 +195,7 @@ export default function DietUser() {
                 <TouchableOpacity style={styles.addEating} onPress={() => { addEating() }}>
                     <FontAwesome5 name="plus-square" size={24} color="black" />
                 </TouchableOpacity>
+                <View style={{height: 120, width: '100%'}}/>
             </ScrollView>
             <BottomTab />
 

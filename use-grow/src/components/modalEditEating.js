@@ -77,7 +77,7 @@ export default function ModalEditEating(props) {
             onRequestClose={() => { props.setVisible(false) }}
         >
             <KeyboardAvoidingView style={styles.modalViewAvoid} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <ScrollView style={styles.scrollModalView} alignItems={'center'} justifyContent={'center'}>
+                <View style={styles.backModalView}>
                     <View style={styles.modalView}>
                         <View style={styles.headerModal}>
                             <Text style={styles.editModalTitle}>Edite sua refeição</Text>
@@ -147,7 +147,7 @@ export default function ModalEditEating(props) {
 
                         </View>
                     </View>
-                </ScrollView>
+                </View>
             </KeyboardAvoidingView>
         </Modal>
     );
@@ -161,17 +161,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
-    scrollModalView: {
+    backModalView: {
         width: "100%",
         height: "100%",
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     modalView: {
         backgroundColor: "#FFF",
         alignItems: "center",
         justifyContent: 'center',
-        width: width * 0.8,
-        height: height * 0.7,
+        width: '80%',
         borderRadius: 20,
+        padding: 10,
     },
     headerModal: {
         width: '100%',
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     },
 
     eatingViewEdit: {
-        width: '90%',
+        width: '95%',
         alignItems: 'center',
         backgroundColor: 'rgba(80,215, 195, 1)',
         borderRadius: 20,

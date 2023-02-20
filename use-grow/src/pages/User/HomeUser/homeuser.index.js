@@ -14,11 +14,13 @@ import BottomTab from "../../../components/bottomTab";
 import dataItens from "../../../assets/data";
 import { FontAwesome5 } from '@expo/vector-icons';
 const dataItensLocal = dataItens();
+import ModalProductInfo from "../../../components/modalProductInfo";
 
 export default function HomeUser() {
-  const navigation = useNavigation();
   const [data, setData] = useState(dataItensLocal);
   const [searchText, setSearchText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     if (searchText === "") {
@@ -32,6 +34,12 @@ export default function HomeUser() {
       )
     }
   }, [searchText]);
+
+  function openProductInfo(item){
+    setProduct(item);
+    setModalVisible(true);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -56,7 +64,10 @@ export default function HomeUser() {
                 <Text style={styles.itemTitle}>{item.title.length > 27 ? '' + item.title.slice(0, 27) + '...' : item.title}</Text>
                 <View style={styles.itemPriceView}>
                   <Text style={styles.itemPrice}>{item.price}</Text>
-                  <TouchableOpacity style={styles.itemButton}>
+                  <TouchableOpacity 
+                    style={styles.itemButton}
+                    onPress={() => openProductInfo(item)}
+                  >
                     <FontAwesome5 name="plus" size={14} color="black" />
                   </TouchableOpacity>
                 </View>
@@ -64,10 +75,12 @@ export default function HomeUser() {
             </View>
           </Animatable.View>
         ))}
+        <View style={{width: '100%', height: 150}}/>
       </ScrollView>
 
       <BottomTab />
-
+      
+      {modalVisible && <ModalProductInfo setProduct={setProduct} product={product} setModalVisible={setModalVisible} modalVisible={modalVisible} />}
     </View>
   );
 }
