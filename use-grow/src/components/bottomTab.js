@@ -28,9 +28,13 @@ export default function BottomTab() {
     navigation.navigate('DietUser');
   }
 
+  function gotoSettings() {
+    navigation.navigate('SettingsUser');
+  }
+
   return (
     <Animatable.View style={styles.bottomTab}>
-      <TouchableOpacity style={styles.circleArea}>
+      <TouchableOpacity style={styles.circleArea} onPress={gotoSettings}>
         <Ionicons name="settings" size={24} color="#2F2F2F" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.circleArea} onPress={gotoDiet}>
