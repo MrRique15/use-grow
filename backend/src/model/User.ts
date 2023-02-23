@@ -6,7 +6,11 @@ export class UserAttributes {
     email: string
     password: string
     age: number
-    dream: string
+    weight: number
+    goal: string
+    finishedExercices: number
+    daysCount: number
+    subscription: string
     created_at?: Date
     updated_at?: Date
     confirmation_token?: number
@@ -38,7 +42,23 @@ const UserSchema = new Schema(
             type: Number,
             required: true
         },
-        dream: {
+        weight: {
+            type: Number,
+            required: true
+        },
+        goal:{
+            type: String,
+            required: true
+        },
+        finishedExercices:{
+            type: Number,
+            required: true
+        },
+        daysCount:{
+            type: Number,
+            required: true
+        },
+        subscription:{
             type: String,
             required: true
         },
