@@ -82,13 +82,13 @@ export default function SignIn() {
             <Text style={styles.buttonText}>Atleta</Text>
           </TouchableOpacity>
 
-          <Text style={styles.description}>Um estilo de conta voltada à empresas que irão fornecer produtos aos nosso usuários.</Text>
+          {/* <Text style={styles.description}>Um estilo de conta voltada à empresas que irão fornecer produtos aos nosso usuários.</Text>
           <TouchableOpacity
             style={styles.button}
             onPress={changeToCompany}
           >
             <Text style={styles.buttonText}>Anunciante</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity
             style={styles.buttonGotoSignin}

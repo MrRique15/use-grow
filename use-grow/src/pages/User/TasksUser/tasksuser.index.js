@@ -11,78 +11,13 @@ import BottomTab from "../../../components/bottomTab";
 import { FontAwesome5, Feather } from '@expo/vector-icons';
 import ModalEditExercise from "../../../components/modalEditExercise";
 
-const tasksUser = [
-    [
-        {
-            id: 1,
-            title: 'Flexao',
-            description: '3x10',
-            done: true
-        },
-        {
-            id: 2,
-            title: 'Supino',
-            description: '3x12',
-            done: false
-        },
-        {
-            id: 3,
-            title: 'Escada',
-            description: '3x15',
-            done: false
-        },
-    ],
-    [
-        {
-            id: 1,
-            title: 'Supino',
-            description: '3x10',
-            done: false
-        },
-        {
-            id: 2,
-            title: 'Corda',
-            description: '3x12',
-            done: false
-        },
-        {
-            id: 3,
-            title: 'Esteira',
-            description: '3x15',
-            done: false
-        },
-    ],
-    [],
-    [],
-    [],
-    [
-        {
-            id: 1,
-            title: 'Abdominal',
-            description: '3x10',
-            done: false
-        },
-        {
-            id: 2,
-            title: 'Corda',
-            description: '3x12',
-            done: false
-        },
-        {
-            id: 3,
-            title: 'Esteira',
-            description: '3x15',
-            done: false
-        },
-    ],
-    [],
-]
+import { userProfileData } from "../../../assets/data";
 
 export default function TasksUser() {
     const daysOfTheWeek = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
     const day = new Date().getDay();
     const [daySelected, setDaySelected] = useState(day);
-    const [dataTasks, setDataTasks] = useState(tasksUser[daySelected]);
+    const [dataTasks, setDataTasks] = useState(userProfileData['tasks'][daySelected]);
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [exerciseId, setExerciseId] = useState(null);
 
@@ -118,7 +53,7 @@ export default function TasksUser() {
     }
 
     useEffect(() => {
-        setDataTasks(tasksUser[daySelected]);
+        setDataTasks(userProfileData['tasks'][daySelected]);
     }, [daySelected]);
 
     return (

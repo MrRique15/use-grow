@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import BottomTab from "../../../components/bottomTab";
-import dataItens from "../../../assets/data";
+import { dataProducts } from "../../../assets/data";
 import { FontAwesome5 } from '@expo/vector-icons';
-const dataItensLocal = dataItens();
+const dataItensLocal = dataProducts;
 import ModalProductInfo from "../../../components/modalProductInfo";
 
 export default function HomeUser() {

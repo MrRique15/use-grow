@@ -16,105 +16,14 @@ import {
 } from '@expo/vector-icons';
 import ModalEditEating from "../../../components/modalEditEating";
 
-const userProfileData = {
-    "name": "Fulano",
-    "surename": "de tal",
-    "age": 20,
-    "weight": 75.8,
-    "height": 1.80,
-    "goal": "Emagrecer",
-    "finishedExercices": 235,
-    "daysCount": 43,
-    "subscription": "Premium"
-}
+import { userProfileData } from "../../../assets/data";
 import { Divider } from 'react-native-elements';
 
-const eatingsInitial = [
-    {
-        'name': 'Café da manhã',
-        'foods': [
-            {
-                'name': 'Pão',
-                'amount': '100g'
-            },
-            {
-                'name': 'Requeijão',
-                'amount': '150g'
-            },
-            {
-                'name': 'Bolacha',
-                'amount': '100g'
-            }
-        ]
-    },
-    {
-        'name': 'Almoço',
-        'foods': [
-            {
-                'name': 'Carne',
-                'amount': '100g'
-            },
-            {
-                'name': 'Batata Doce',
-                'amount': '150g'
-            },
-            {
-                'name': 'Whey',
-                'amount': '100g'
-            },
-            {
-                'name': 'Arroz',
-                'amount': '100g'
-            },
-            {
-                'name': 'Alface',
-                'amount': '150g'
-            },
-            {
-                'name': 'Frango',
-                'amount': '150g'
-            },
-            {
-                'name': 'Arroz',
-                'amount': '100g'
-            },
-            {
-                'name': 'Alface',
-                'amount': '150g'
-            },
-            {
-                'name': 'Frango',
-                'amount': '150g'
-            },
-            {
-                'name': 'Arroz',
-                'amount': '100g'
-            }
-        ]
-    },
-    {
-        'name': 'Jantar',
-        'foods': [
-            {
-                'name': 'Arroz',
-                'amount': '100g'
-            },
-            {
-                'name': 'Alface',
-                'amount': '150g'
-            },
-            {
-                'name': 'Frango',
-                'amount': '150g'
-            }
-        ]
-    },
-]
 export default function DietUser() {
 
     const navigation = useNavigation();
-    const [userData, setUserData] = useState(userProfileData);
-    const [eatings, setEatings] = useState(eatingsInitial);
+    const [userData, setUserData] = useState('');
+    const [eatings, setEatings] = useState(userProfileData["eatings"]);
     const [modalVisible, setModalVisible] = useState(false);
     const [editingIndex, setEditingIndex] = useState(null);
 

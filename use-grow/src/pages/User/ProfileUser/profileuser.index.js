@@ -9,17 +9,7 @@ import BottomTab from "../../../components/bottomTab";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
-const userProfileData = {
-  "name": "Fulano",
-  "surename": "de tal",
-  "age": 20,
-  "weight": 75.8,
-  "height": 1.80,
-  "goal": "Emagrecer",
-  "finishedExercices": 235,
-  "daysCount": 43,
-  "subscription": "Premium"
-}
+import { userProfileData } from "../../../assets/data";
 import { Divider } from 'react-native-elements';
 
 export default function ProfileUser() {
@@ -40,7 +30,7 @@ export default function ProfileUser() {
             <Ionicons name="person-circle-outline" size={150} color="#FFFFFF" />
           </View>
 
-          <Text style={styles.userNameTitle}>{userData.name + ' ' + userData.surename}</Text>
+          <Text style={styles.userNameTitle}>{userData.name}</Text>
 
           <TouchableOpacity 
             style={styles.touchableLine} 
@@ -71,7 +61,7 @@ export default function ProfileUser() {
       </View>
 
       <View style={styles.personalInfo}>
-        <Text style={styles.personalInfoItens}>Nome: {userData.name + ' ' +userData.surename}</Text>
+        <Text style={styles.personalInfoItens}>Nome: {userData.name}</Text>
         <Text style={styles.personalInfoItens}>Idade: {userData.age} anos</Text>
         <Text style={styles.personalInfoItens}>Peso: {userData.weight} kg</Text>
         <Text style={styles.personalInfoItens}>Estatura: {userData.height} m</Text>
