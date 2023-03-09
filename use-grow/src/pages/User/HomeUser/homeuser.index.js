@@ -54,7 +54,12 @@ export default function HomeUser() {
 
       <ScrollView>
         {data.map((item) => (
-          <Animatable.View delay={600} animation={item.id % 2 == 0 ? 'fadeInLeft' : 'fadeInRight'} style={styles.itemContainer} key={item.id}>
+          <Animatable.View 
+            delay={600} 
+            animation={item.id % 2 == 0 ? 'fadeInLeft' : 'fadeInRight'} 
+            style={styles.itemContainer} 
+            key={item.id}
+          >
             <View style={styles.itemDisplayView}>
               <View style={styles.imageItemView}>
                 <Image source={item.image} style={styles.imageItem}></Image>
