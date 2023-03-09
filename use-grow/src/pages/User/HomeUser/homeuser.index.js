@@ -65,7 +65,9 @@ export default function HomeUser() {
                 <Image source={item.image} style={styles.imageItem}></Image>
               </View>
               <View style={styles.itemItens}>
-                <Text style={styles.itemTitle}>{item.title.length > 27 ? '' + item.title.slice(0, 27) + '...' : item.title}</Text>
+                <Text style={styles.itemTitle}>
+                  {item.title.length > 27 ? '' + item.title.slice(0, 27) + '...' : item.title}
+                </Text>
                 <View style={styles.itemPriceView}>
                   <Text style={styles.itemPrice}>{item.price}</Text>
                   <TouchableOpacity 
@@ -84,7 +86,15 @@ export default function HomeUser() {
 
       <BottomTab />
       
-      {modalVisible && <ModalProductInfo setProduct={setProduct} product={product} setModalVisible={setModalVisible} modalVisible={modalVisible} />}
+      {
+        modalVisible && 
+        <ModalProductInfo 
+          setProduct={setProduct} 
+          product={product} 
+          setModalVisible={setModalVisible} 
+          modalVisible={modalVisible} 
+        />
+      }
     </View>
   );
 }
