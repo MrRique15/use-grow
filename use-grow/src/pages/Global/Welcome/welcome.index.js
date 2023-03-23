@@ -23,7 +23,7 @@ export default function Welcome() {
       </View>
 
       <Animatable.View delay={600} animation='fadeInUp' style={styles.formContainer}>
-        <Text style={styles.title}>Otimize sua rotina de treinos Apply&Grow</Text>
+        <Text style={styles.title}>Otimize sua rotina de treinos Use&Grow</Text>
         <Text style={styles.text}>Acesse e conheça os benefícios</Text>
 
         <TouchableOpacity
