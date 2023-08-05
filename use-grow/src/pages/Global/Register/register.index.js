@@ -82,13 +82,13 @@ export default function SignIn() {
             <Text style={styles.buttonText}>Atleta</Text>
           </TouchableOpacity>
 
-          <Text style={styles.description}>Um estilo de conta voltada à empresas que irão fornecer produtos aos nosso usuários.</Text>
+          {/* <Text style={styles.description}>Um estilo de conta voltada à empresas que irão fornecer produtos aos nosso usuários.</Text>
           <TouchableOpacity
             style={styles.button}
             onPress={changeToCompany}
           >
             <Text style={styles.buttonText}>Anunciante</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity
             style={styles.buttonGotoSignin}
@@ -235,12 +235,12 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(80,215, 195, 1)',
   },
   logoContainer: {
     flex: 1,
     marginTop: '30%',
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(80,215, 195, 1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -286,9 +286,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(80,215, 195, 1)',
     width: '100%',
-    borderRadius: 4,
+    borderRadius: 20,
     paddingVertical: 8,
     marginTop: 14,
     justifyContent: 'center',

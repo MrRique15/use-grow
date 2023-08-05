@@ -9,16 +9,17 @@ import {
   TextInput,
 } from "react-native";
 import * as Animatable from 'react-native-animatable';
-import { useNavigation } from "@react-navigation/native";
 import BottomTab from "../../../components/bottomTab";
-import dataItens from "../../../assets/data";
+import { dataProducts } from "../../../assets/data";
 import { FontAwesome5 } from '@expo/vector-icons';
-const dataItensLocal = dataItens();
+const dataItensLocal = dataProducts;
+import ModalProductInfo from "../../../components/modalProductInfo";
 
 export default function HomeUser() {
-  const navigation = useNavigation();
   const [data, setData] = useState(dataItensLocal);
   const [searchText, setSearchText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     if (searchText === "") {
@@ -32,6 +33,12 @@ export default function HomeUser() {
       )
     }
   }, [searchText]);
+
+  function openProductInfo(item){
+    setProduct(item);
+    setModalVisible(true);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -47,27 +54,47 @@ export default function HomeUser() {
 
       <ScrollView>
         {data.map((item) => (
-          <Animatable.View delay={600} animation={item.id % 2 == 0 ? 'fadeInLeft' : 'fadeInRight'} style={styles.itemContainer} key={item.id}>
+          <Animatable.View 
+            delay={600} 
+            animation={item.id % 2 == 0 ? 'fadeInLeft' : 'fadeInRight'} 
+            style={styles.itemContainer} 
+            key={item.id}
+          >
             <View style={styles.itemDisplayView}>
               <View style={styles.imageItemView}>
                 <Image source={item.image} style={styles.imageItem}></Image>
               </View>
               <View style={styles.itemItens}>
-                <Text style={styles.itemTitle}>{item.title}</Text>
+                <Text style={styles.itemTitle}>
+                  {item.title.length > 27 ? '' + item.title.slice(0, 27) + '...' : item.title}
+                </Text>
                 <View style={styles.itemPriceView}>
                   <Text style={styles.itemPrice}>{item.price}</Text>
-                  <TouchableOpacity style={styles.itemButton}>
-                    <Text style={styles.itemButtonText}>Comprar</Text>
+                  <TouchableOpacity 
+                    style={styles.itemButton}
+                    onPress={() => openProductInfo(item)}
+                  >
+                    <FontAwesome5 name="plus" size={14} color="black" />
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
           </Animatable.View>
         ))}
+        <View style={{width: '100%', height: 150}}/>
       </ScrollView>
 
       <BottomTab />
-
+      
+      {
+        modalVisible && 
+        <ModalProductInfo 
+          setProduct={setProduct} 
+          product={product} 
+          setModalVisible={setModalVisible} 
+          modalVisible={modalVisible} 
+        />
+      }
     </View>
   );
 }
@@ -75,7 +102,7 @@ export default function HomeUser() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#38A69D',
+    backgroundColor: 'rgba(80,215, 195, 1)',
     alignContent: 'center'
   },
 
@@ -84,7 +111,7 @@ const styles = StyleSheet.create({
     height: '15%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: '#abaab1',
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
     shadowColor: '#000',
@@ -99,19 +126,19 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    color: '#FFF',
+    color: '#2F2F2F',
     fontWeight: 'bold',
-    marginTop: '6%',
+    marginTop: '10%',
   },
   input: {
-    borderColor: '#7CFC00',
-    borderWidth: 3,
+    borderColor: 'rgba(80,215, 195, 1)',
+    borderWidth: 2,
     borderRadius: 10,
     marginTop: 10,
     color: '#000',
     backgroundColor: '#FFF',
-    height: '20%',
-    width: '50%',
+    height: '21%',
+    width: '60%',
     textAlign: 'center',
   },
 
@@ -170,6 +197,8 @@ const styles = StyleSheet.create({
     alignContent: 'flex-end',
     justifyContent: 'flex-end',
     alignItems: 'center',
+    bottom: 0,
+    marginTop: '6%',
   },
   itemPrice: {
     fontSize: 15,
@@ -177,20 +206,30 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginBottom: '3%',
     marginLeft: '28%',
-    marginRight: '2%',
+    marginRight: '4%',
     bottom: 0,
+    
   },
   itemButton: {
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 3,
-    backgroundColor: '#7CFC00',
-    width: '30%',
-    height: "70%",
+    backgroundColor: 'rgba(100,205, 155, 1)',
+    width: 40,
+    height: 24,
     borderRadius: 10,
     marginRight: "10%",
     alignSelf: 'flex-end',
+    bottom: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.45,
+    shadowRadius: 2.94,
+    elevation: 5,
   },
   itemButtonText: {
     fontSize: 13,
